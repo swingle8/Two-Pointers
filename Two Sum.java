@@ -1,56 +1,51 @@
-// 1. Two Sum
-// Easy
+// Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
 
-// 16818
+// The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.
 
-// 608
+// Note:
 
-// Add to List
-
-// Share
-// Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
-
-// You may assume that each input would have exactly one solution, and you may not use the same element twice.
-
-// You can return the answer in any order.
-
+// Your returned answers (both index1 and index2) are not zero-based.
+// You may assume that each input would have exactly one solution and you may not use the same element twice.
  
 
 // Example 1:
 
-// Input: nums = [2,7,11,15], target = 9
-// Output: [0,1]
-// Output: Because nums[0] + nums[1] == 9, we return [0, 1].
+// Input: numbers = [2,7,11,15], target = 9
+// Output: [1,2]
+// Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.
 // Example 2:
 
-// Input: nums = [3,2,4], target = 6
-// Output: [1,2]
+// Input: numbers = [2,3,4], target = 6
+// Output: [1,3]
 // Example 3:
 
-// Input: nums = [3,3], target = 6
-// Output: [0,1]
+// Input: numbers = [-1,0], target = -1
+// Output: [1,2]
  
 
 // Constraints:
 
-// 2 <= nums.length <= 105
-// -109 <= nums[i] <= 109
-// -109 <= target <= 109
-// Only one valid answer exists.
+// 2 <= nums.length <= 3 * 104
+// -1000 <= nums[i] <= 1000
+// nums is sorted in increasing order.
+// -1000 <= target <= 1000
 
 class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+    public int[] twoSum(int[] numbers, int target) {
+        int start = 0;
+        int end = numbers.length-1;
         int [] ans = new int[2];
-        for (int i = 0 ; i < nums.length ; i++) {
-            int curr = nums[i];
-            if (map.containsKey(target-curr)) {
-                ans[0] = i;
-                ans[1] = map.get(target-curr); 
+        while (start < end) {
+            if (numbers[start] + numbers[end] == target) {
+                ans[0] = start+1;
+                ans[1] = end+1;
                 return ans;
             }
+            else if (numbers[start] + numbers[end] < target)
+                start++;
             else
-                map.put(nums[i], i);
+                end--;
+            
         }
         return ans;
     }
